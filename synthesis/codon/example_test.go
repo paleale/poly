@@ -32,7 +32,7 @@ func ExampleOptimize() {
 	// iterate through the features of the genbank file and if the feature is a coding region, append the sequence to the string builder
 	for _, feature := range sequence.Features {
 		if feature.Type == "CDS" {
-			sequence, _ := feature.GetSequence()
+			sequence := feature.GetSequence()
 			// Note: sometimes, genbank files will have annotated CDSs that are pseudo genes (not having triplet codons).
 			// This will shift the entire codon table, messing up the end results. To fix this, make sure to do a modulo
 			// check.
@@ -108,7 +108,7 @@ func ExampleCompromiseCodonTable() {
 	// iterate through the features of the genbank file and if the feature is a coding region, append the sequence to the string builder
 	for _, feature := range sequence.Features {
 		if feature.Type == "CDS" {
-			sequence, _ := feature.GetSequence()
+			sequence := feature.GetSequence()
 			codingRegionsBuilder.WriteString(sequence)
 		}
 	}
@@ -127,7 +127,7 @@ func ExampleCompromiseCodonTable() {
 	// iterate through the features of the genbank file and if the feature is a coding region, append the sequence to the string builder
 	for _, feature := range sequence2.Features {
 		if feature.Type == "CDS" {
-			sequence, _ := feature.GetSequence()
+			sequence := feature.GetSequence()
 			codingRegionsBuilder2.WriteString(sequence)
 		}
 	}
@@ -159,7 +159,7 @@ func ExampleAddCodonTable() {
 	// iterate through the features of the genbank file and if the feature is a coding region, append the sequence to the string builder
 	for _, feature := range sequence.Features {
 		if feature.Type == "CDS" {
-			sequence, _ := feature.GetSequence()
+			sequence := feature.GetSequence()
 			codingRegionsBuilder.WriteString(sequence)
 		}
 	}
@@ -179,7 +179,7 @@ func ExampleAddCodonTable() {
 	// iterate through the features of the genbank file and if the feature is a coding region, append the sequence to the string builder
 	for _, feature := range sequence2.Features {
 		if feature.Type == "CDS" {
-			sequence, _ := feature.GetSequence()
+			sequence := feature.GetSequence()
 			codingRegionsBuilder2.WriteString(sequence)
 		}
 	}

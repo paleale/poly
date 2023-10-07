@@ -126,12 +126,12 @@ func (sequence *Genbank) AddFeature(feature *Feature) error {
 }
 
 // GetSequence returns the sequence of a feature.
-func (feature Feature) GetSequence() (string, error) {
+func (feature Feature) GetSequence() string {
 	return getFeatureSequence(feature, feature.Location)
 }
 
 // getFeatureSequence takes a feature and location object and returns a sequence string.
-func getFeatureSequence(feature Feature, location Location) (string, error) {
+func getFeatureSequence(feature Feature, location Location) string {
 	var sequenceBuffer bytes.Buffer
 	var sequenceString string
 	parentSequence := feature.ParentSequence.Sequence
@@ -140,7 +140,7 @@ func getFeatureSequence(feature Feature, location Location) (string, error) {
 		sequenceBuffer.WriteString(parentSequence[location.Start:location.End])
 	} else {
 		for _, subLocation := range location.SubLocations {
-			sequence, _ := getFeatureSequence(feature, subLocation)
+			sequence := getFeatureSequence(feature, subLocation)
 
 			sequenceBuffer.WriteString(sequence)
 		}
@@ -153,7 +153,7 @@ func getFeatureSequence(feature Feature, location Location) (string, error) {
 		sequenceString = sequenceBuffer.String()
 	}
 
-	return sequenceString, nil
+	return sequenceString
 }
 
 // Read reads a GBK file from path and returns a Genbank struct.

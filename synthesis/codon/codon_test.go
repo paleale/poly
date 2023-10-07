@@ -86,7 +86,7 @@ func TestOptimize(t *testing.T) {
 	// iterate through the features of the genbank file and if the feature is a coding region, append the sequence to the string builder
 	for _, feature := range sequence.Features {
 		if feature.Type == "CDS" {
-			sequence, _ := feature.GetSequence()
+			sequence := feature.GetSequence()
 			codingRegionsBuilder.WriteString(sequence)
 		}
 	}
@@ -116,7 +116,7 @@ func TestOptimizeSameSeed(t *testing.T) {
 	// iterate through the features of the genbank file and if the feature is a coding region, append the sequence to the string builder
 	for _, feature := range sequence.Features {
 		if feature.Type == "CDS" {
-			sequence, _ := feature.GetSequence()
+			sequence := feature.GetSequence()
 			codingRegionsBuilder.WriteString(sequence)
 		}
 	}
@@ -146,7 +146,7 @@ func TestOptimizeDifferentSeed(t *testing.T) {
 	// iterate through the features of the genbank file and if the feature is a coding region, append the sequence to the string builder
 	for _, feature := range sequence.Features {
 		if feature.Type == "CDS" {
-			sequence, _ := feature.GetSequence()
+			sequence := feature.GetSequence()
 			codingRegionsBuilder.WriteString(sequence)
 		}
 	}
@@ -302,7 +302,7 @@ func TestCompromiseCodonTable(t *testing.T) {
 	// iterate through the features of the genbank file and if the feature is a coding region, append the sequence to the string builder
 	for _, feature := range sequence.Features {
 		if feature.Type == "CDS" {
-			sequence, _ := feature.GetSequence()
+			sequence := feature.GetSequence()
 			codingRegionsBuilder.WriteString(sequence)
 		}
 	}
@@ -322,7 +322,7 @@ func TestCompromiseCodonTable(t *testing.T) {
 	// iterate through the features of the genbank file and if the feature is a coding region, append the sequence to the string builder
 	for _, feature := range sequence2.Features {
 		if feature.Type == "CDS" {
-			sequence, _ := feature.GetSequence()
+			sequence := feature.GetSequence()
 			codingRegionsBuilder2.WriteString(sequence)
 		}
 	}
@@ -370,7 +370,7 @@ func TestCapitalizationRegression(t *testing.T) {
 	// iterate through the features of the genbank file and if the feature is a coding region, append the sequence to the string builder
 	for _, feature := range sequence.Features {
 		if feature.Type == "CDS" {
-			sequence, _ := feature.GetSequence()
+			sequence := feature.GetSequence()
 			codingRegionsBuilder.WriteString(sequence)
 		}
 	}
