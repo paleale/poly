@@ -128,14 +128,10 @@ var (
 // StoreFeatureSequences calls StoreSequence on all features.
 // The resulting JSON is guaranteed to have useful Feature.Sequence values.
 // Useful when exporting for downstream analysis, such as with json.Marshal.
-func (sequence *Genbank) StoreFeatureSequences() error {
+func (sequence *Genbank) StoreFeatureSequences() {
 	for i := range sequence.Features {
-		_, err := sequence.Features[i].StoreSequence()
-		if err != nil {
-			return err
-		}
+		sequence.Features[i].StoreSequence()
 	}
-	return nil
 }
 
 // AddFeature adds a feature to a Genbank struct.
@@ -151,21 +147,18 @@ func (sequence *Genbank) AddFeature(feature *Feature) error {
 }
 
 // GetSequence returns the sequence of a feature.
-func (feature Feature) GetSequence() (string, error) {
+func (feature Feature) GetSequence() string {
 	return getFeatureSequence(feature, feature.Location)
 }
 
 // StoreSequence infers and assigns the value of feature.Sequence
 // if currently an empty string.
-func (feature *Feature) StoreSequence() (string, error) {
+func (feature *Feature) StoreSequence() string {
 	if feature.Sequence != "" {
-		return feature.Sequence, nil
+		return feature.Sequence
 	}
-	seq, err := getFeatureSequence(*feature, feature.Location)
-	if err == nil {
-		feature.Sequence = seq
-	}
-	return seq, err
+	seq := getFeatureSequence(*feature, feature.Location)
+	return seq
 }
 
 // Copy creates deep copy of Feature, which supports safe duplication.
@@ -186,7 +179,7 @@ func CopyLocation(location Location) Location {
 }
 
 // getFeatureSequence takes a feature and location object and returns a sequence string.
-func getFeatureSequence(feature Feature, location Location) (string, error) {
+func getFeatureSequence(feature Feature, location Location) string {
 	var sequenceBuffer bytes.Buffer
 	parentSequence := feature.ParentSequence.Sequence
 
@@ -194,11 +187,7 @@ func getFeatureSequence(feature Feature, location Location) (string, error) {
 		sequenceBuffer.WriteString(parentSequence[location.Start:location.End])
 	} else {
 		for _, subLocation := range location.SubLocations {
-			sequence, err := getFeatureSequence(feature, subLocation)
-			if err != nil {
-				return "", err
-			}
-
+			sequence := getFeatureSequence(feature, subLocation)
 			sequenceBuffer.WriteString(sequence)
 		}
 	}
@@ -209,7 +198,7 @@ func getFeatureSequence(feature Feature, location Location) (string, error) {
 		sequenceString = transform.ReverseComplement(sequenceString)
 	}
 
-	return sequenceString, nil
+	return sequenceString
 }
 
 // WriteTo implements the io.WriterTo interface on genbank records.

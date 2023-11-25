@@ -70,9 +70,8 @@ Unsure where to begin contributing to Poly? You can start by looking through the
 
 ### Working on your first Pull Request? 
 
-You can learn how from this *free* series, [How to Contribute to an Open Source Project on GitHub](https://egghead.io/series/how-to-contribute-to-an-open-source-project-on-github).
-
-You can also check out [these](http://makeapullrequest.com/) [tutorials](http://www.firsttimersonly.com/).
+You can learn how from this *free* series, [How to Contribute to an Open Source Project on GitHub](https://egghead.io/courses/how-to-contribute-to-an-open-source-project-on-github).
+You can also check out this [tutorial](http://www.firsttimersonly.com/).
 
 At this point, you're ready to make your changes! Feel free to ask for help; everyone is a beginner at first :smile_cat:
 

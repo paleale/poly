@@ -125,7 +125,7 @@ func TestFileIOTutorial(t *testing.T) {
 	// get the sequence of each feature using the GetSequence method.
 
 	feature := puc19.Features[1]
-	featureSequence, _ := feature.GetSequence()       // this is the sequence of the feature
+	featureSequence := feature.GetSequence()          // this is the sequence of the feature
 	expectedFeatureSequence := "gggaaacgcctggtatcttt" // this is what we expect the sequence of the feature to be
 	if featureSequence != expectedFeatureSequence {
 		t.Errorf("Expected feature sequence to be %s but got %s", expectedFeatureSequence, featureSequence)
